@@ -13,6 +13,7 @@ const Review = () => {
     const [comments, setComments] = useState([])
     const [mostCommented, setMostCommented] = useState([])
 
+    // fetch reported posts 
     useEffect(()=> {
         let mounted = true
         const fetchReportedPosts = async() => {
@@ -29,6 +30,7 @@ const Review = () => {
     return ()=>(mounted=false)
     },[])
 
+    // fetch reported comments 
     useEffect(()=> {
         let mounted = true
         const fetchReportedComments = async() => {
@@ -45,6 +47,7 @@ const Review = () => {
     return ()=>(mounted=false)
     },[])
 
+    //fetch most commented posts
     useEffect(()=>{ 
         let mounted = true
         const fetchMostCommentedPosts = async() => {
@@ -62,59 +65,22 @@ const Review = () => {
     return ()=>(mounted=false)
     },[])
 
+
+    // Reported Posts code
     const GetReportedPosts = () => {
         return(
         <Box p={2}>
-        <Paper>
-                <Typography  display="flex" alignItems="center" justifyContent="center"  variant="h4">Reported Posts</Typography>
-                {posts.map((post) => (
-                <List key={post.id}>
-                    <hr></hr>
-                        <ListItem alignItems="flex-start">
-                            <Typography
-                                sx={{ display: 'inline' }}
-                                component="span"
-                                color="text.primary">
-                                Report Content :{post.report_content}
-                            </Typography>
-                        </ListItem>
-                        <ListItem alignItems="flex-start">
-                            <Typography
-                                sx={{ display: 'inline' }}
-                                component="span"
-                                color="text.primary">
-                                Post Title: {post.post.post_title}
-                            </Typography>
-                        </ListItem>
-                        <ListItem alignItems="flex-start"> 
-                            <Typography
-                            sx={{ display: 'inline' }}
-                            component="span"
-                            color="text.primary">
-                            Post Id: {post.post.id}
-                            </Typography>  
-                        </ListItem> 
-                </List>
-            ))}
-        </Paper>
-    </Box>
-        )
-    }
-
-    const GetReportedComments = () => {
-        return (
-            <Box  p={2}>
             <Paper>
-                <Typography  display="flex" alignItems="center" justifyContent="center"  variant="h4">Reported Comments</Typography>
-                    {comments.map((comment) => (
-                    <List key={comment.id}>
+                    <Typography  display="flex" alignItems="center" justifyContent="center"  variant="h4">Reported Posts</Typography>
+                    {posts.map((post) => (
+                    <List key={post.id}>
                         <hr></hr>
                             <ListItem alignItems="flex-start">
                                 <Typography
                                     sx={{ display: 'inline' }}
                                     component="span"
                                     color="text.primary">
-                                    Report Content :{comment.report_content}
+                                    Report Content :{post.report_content}
                                 </Typography>
                             </ListItem>
                             <ListItem alignItems="flex-start">
@@ -122,7 +88,7 @@ const Review = () => {
                                     sx={{ display: 'inline' }}
                                     component="span"
                                     color="text.primary">
-                                    comment Content: {comment.comment.comment_content}
+                                    Post Title: {post.post.post_title}
                                 </Typography>
                             </ListItem>
                             <ListItem alignItems="flex-start"> 
@@ -130,7 +96,7 @@ const Review = () => {
                                 sx={{ display: 'inline' }}
                                 component="span"
                                 color="text.primary">
-                                Comment Id: {comment.comment.id}
+                                Post Id: {post.post.id}
                                 </Typography>  
                             </ListItem> 
                     </List>
@@ -140,6 +106,47 @@ const Review = () => {
         )
     }
 
+    //Reported Comments
+    const GetReportedComments = () => {
+        return (
+            <Box  p={2}>
+                <Paper>
+                    <Typography  display="flex" alignItems="center" justifyContent="center"  variant="h4">Reported Comments</Typography>
+                        {comments.map((comment) => (
+                        <List key={comment.id}>
+                            <hr></hr>
+                                <ListItem alignItems="flex-start">
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        color="text.primary">
+                                        Report Content :{comment.report_content}
+                                    </Typography>
+                                </ListItem>
+                                <ListItem alignItems="flex-start">
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        color="text.primary">
+                                        comment Content: {comment.comment.comment_content}
+                                    </Typography>
+                                </ListItem>
+                                <ListItem alignItems="flex-start"> 
+                                    <Typography
+                                    sx={{ display: 'inline' }}
+                                    component="span"
+                                    color="text.primary">
+                                    Comment Id: {comment.comment.id}
+                                    </Typography>  
+                                </ListItem> 
+                        </List>
+                    ))}
+                </Paper>
+            </Box>
+        )
+    }
+
+    // most comments code
     const GetMostCommentedPosts= () => {
         return(
             <Box  p={2}>
@@ -179,21 +186,22 @@ const Review = () => {
         )
     }
 
+    //main code
     let isAdmin = +localStorage.getItem("isAdmin")
     if(isAdmin){
-    return (
-        <React.Fragment>
-            <Grid container justifyContent="center">
-                {GetReportedPosts()}
-                {GetReportedComments()}
-                {GetMostCommentedPosts()}
-            </Grid>
-        </React.Fragment>
-    )
+        return (
+            <React.Fragment>
+                <Grid container justifyContent="center">
+                    {GetReportedPosts()}
+                    {GetReportedComments()}
+                    {GetMostCommentedPosts()}
+                </Grid>
+            </React.Fragment>
+        )
     } else {
         return (
             <div>
-            <Typography  display="flex" alignItems="center" justifyContent="center"  variant="h4">Your are not authorizated</Typography>
+                <Typography  display="flex" alignItems="center" justifyContent="center"  variant="h4">Your are not authorizated</Typography>
             </div>
         )
     }
