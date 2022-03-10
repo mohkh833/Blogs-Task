@@ -35,6 +35,8 @@ $ npm install
 $ npm start
 ```
 to run the server side
+open XAMP
+
 ```
 $ cd api
 $ npm install
