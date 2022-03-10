@@ -18,6 +18,8 @@ const Register = () => {
     const [imgUrl, setImgUrl] = useState("")
     const [err, setError] = useState(false)
 
+    //submit registeration
+
     const handleClick = async () => {
         try{
             await publicRequest.post("/auth/register", {email,name, imgUrl, password})
@@ -28,6 +30,7 @@ const Register = () => {
     }
 
 
+    //register form code
     return (
         <Grid container justifyContent="center">
             <Grid item>
