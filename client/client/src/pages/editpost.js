@@ -17,6 +17,7 @@ const EditPost = () => {
 
     let id = localStorage.getItem("postId")
 
+    //mount posts
     useEffect(()=> {
         let mounted = true
             const fetchPost = async() => {
@@ -33,6 +34,7 @@ const EditPost = () => {
         return ()=>(mounted=false)
     },[id])
     
+    // submit edit post
     const handleClick = async() => {
         let postId = localStorage.getItem("postId")
         let body = {post_title, post_content, imgUrl}
@@ -43,10 +45,12 @@ const EditPost = () => {
             console.log(err)
         }
     }
+
+    // edit post form code
     return (
         <Grid container justifyContent="center">
             <Grid item>
-                <Typography  ml={20}  variant="h4">Create Post</Typography>
+                <Typography  ml={20}  variant="h4">Edit Post</Typography>
                 <Paper>
                     <Box m={3} p={5} alignItems="center">
                         <Box display="flex" alignItems="center" justifyContent="center"/>
